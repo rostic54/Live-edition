@@ -1,0 +1,12 @@
+<div class="list">
+  <div class="row header flex align-center around">
+    <div class="brand field flex align-center center">Brand</div>
+    <div class="model field flex align-center center">Model</div>
+  </div>
+  <div class="row item flex align-center around" *ngFor="let product of products">
+    <div class="brand field flex align-center center">{{ product.brand }}</div>
+    <div class="model field flex align-center center">{{ product.model }}</div>
+  </div>
+</div>
+
+

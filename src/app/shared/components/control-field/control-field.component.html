@@ -1,0 +1,4 @@
+<input [(ngModel)]="value"
+       (focusin)="sendEditingStatus(true)"
+       (focusout)="sendEditingStatus(false)"
+       [disabled]="isDisable()">

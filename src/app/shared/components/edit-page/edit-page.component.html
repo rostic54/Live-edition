@@ -1,0 +1,22 @@
+<div class="list">
+  <div class="row header flex align-center around">
+    <div class="brand">Brand</div>
+    <div class="model">Model</div>
+  </div>
+  <div class="row item flex align-center around" *ngFor="let product of products, let i = index">
+    <div class="brand field">
+      <control-field
+        [value]="product.brand"
+        [inProgress]="getFieldStatus(product.index, property.brand)"
+        (editingStatus)="setOrDeleteLiveCondition($event, product.index, property.brand)"
+      ></control-field>
+    </div>
+    <div class="model field">
+      <control-field
+        [value]="product.model"
+        [inProgress]="getFieldStatus(product.index, property.model)"
+        (editingStatus)="setOrDeleteLiveCondition($event, product.index, property.model)"></control-field>
+    </div>
+  </div>
+</div>
+

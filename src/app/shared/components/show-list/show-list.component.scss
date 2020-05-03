@@ -1,0 +1,22 @@
+.list {
+  max-width: 600px;
+  margin: 40px 0;
+  .row {
+    border: 1px solid gray;
+    border-bottom: none;
+    &:last-child {
+      border-bottom: 1px solid gray;
+    }
+    .brand {
+      border-right: 1px solid gray;
+    }
+  }
+  .header {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .field {
+    width: 100%;
+    margin: 5px 20px;
+  }
+}

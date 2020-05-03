@@ -1,0 +1,18 @@
+.container {
+  margin: 10px 15px;
+}
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+}
+a {
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
