@@ -30,14 +30,19 @@ export class EditPageComponent implements OnInit, OnDestroy {
     this._getProducts();
   }
 
-  public setOrDeleteLiveCondition(data: IFieldEmitter, index: number, property: ProductProperty): void {
-    this.conditionService.notify({ id: String(index), type: property, ...data });
+  public deleteLiveCondition({value, status}, id, type): void {
+    status
+      ? this.conditionService.updateStoreValue({value, id, type})
+      : this.conditionService.deleteFromStorage();
   }
 
   public getFieldStatus(id: number, type: ProductProperty): boolean {
     return this.conditionService.checkFieldStatus({ id, type });
   }
 
+  public updateFieldValue(value, id, type) {
+    this.conditionService.updateStoreValue({ id, type, value });
+  }
 
   private _getProducts(): void {
     this.productsService.productList$.pipe(takeUntil(this.destroy$)).subscribe(

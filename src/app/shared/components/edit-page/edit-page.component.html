@@ -8,14 +8,17 @@
       <control-field
         [value]="product.brand"
         [inProgress]="getFieldStatus(product.index, property.brand)"
-        (editingStatus)="setOrDeleteLiveCondition($event, product.index, property.brand)"
+        (editingStatus)="deleteLiveCondition($event, product.index, property.brand)"
+        (valueLive)="updateFieldValue($event, product.index, property.brand)"
       ></control-field>
     </div>
     <div class="model field">
       <control-field
         [value]="product.model"
         [inProgress]="getFieldStatus(product.index, property.model)"
-        (editingStatus)="setOrDeleteLiveCondition($event, product.index, property.model)"></control-field>
+        (editingStatus)="deleteLiveCondition($event, product.index, property.model)"
+        (valueLive)="updateFieldValue($event, product.index, property.model)"></control-field
+      >
     </div>
   </div>
 </div>

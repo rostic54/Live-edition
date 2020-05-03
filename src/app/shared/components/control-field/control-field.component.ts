@@ -10,6 +10,7 @@ export class ControlFieldComponent {
   @Input() value: string;
   @Input() inProgress: boolean;
   @Output() editingStatus = new EventEmitter<IFieldEmitter>();
+  @Output() valueLive = new EventEmitter<string>();
   public inFocus = false;
 
   constructor() {
@@ -22,6 +23,11 @@ export class ControlFieldComponent {
   public sendEditingStatus(status: boolean): void {
     this.inFocus = status;
     this.editingStatus.emit({ value: this.value, status });
+  }
+
+  public updateValue(value): void {
+    this.inFocus = true;
+    this.valueLive.emit(this.value);
   }
 
 }

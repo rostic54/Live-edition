@@ -8,7 +8,7 @@ import IStoredData = LiveEdit.IStoredData;
 })
 export class ConditionService {
   private storageKey = 'notify';
-  public fieldsInProgress = new Map();
+  public editableField: IStoredData;
 
   constructor(private storageMap: StorageService,
               private productService: ProductService) {
@@ -16,28 +16,33 @@ export class ConditionService {
   }
 
   public checkFieldStatus(data): boolean {
-    return this.fieldsInProgress.get(String(data.id)) === data.type;
+    return this.editableField && (this.editableField.id === data.id) && this.editableField.type === data.type;
+  }
+
+  public getStoredData() {
+    this.editableField = this.storageMap.getStorage(this.storageKey);
   }
 
   public updateProductValue(id: number, type: string, value: string): void {
-    this.productService.updateProducts(id, value, type, );
+    this.productService.updateProducts(id, value, type);
   }
 
   public watchStorageNotifications(): void {
     this.storageMap.changes.subscribe(
-      ({ status, id, type, value }: IStoredData) => {
-        if (status) {
-          this.fieldsInProgress.set(id, type);
-        } else {
-          this.updateProductValue(Number(id), type, value);
-          this.fieldsInProgress.delete(id);
+      (data) => {
+        if (data) {
+          this.updateProductValue(Number(data.id), data.type, data.value);
         }
+        this.getStoredData();
       }
     );
   }
 
-  public notify(value: IStoredData): void {
+  public updateStoreValue(value: IStoredData): void {
     this.storageMap.store(this.storageKey, value);
+  }
+
+  public deleteFromStorage() {
     this.storageMap.clear(this.storageKey);
   }
 }

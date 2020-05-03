@@ -19,7 +19,7 @@ export class StorageService implements OnDestroy {
     this.stop();
   }
 
-  public getStorage(key: string) {
+  public getStorage(key: string): IStoredData {
     return JSON.parse(localStorage.getItem(key));
   }
 
@@ -28,9 +28,9 @@ export class StorageService implements OnDestroy {
     this.onSubject.next(data);
   }
 
-  public clear(key) {
+  public clear(key): void {
     localStorage.removeItem(key);
-    this.onSubject.next({id: key, value: null});
+    this.onSubject.next({ id: key, value: null });
   }
 
 
@@ -38,14 +38,15 @@ export class StorageService implements OnDestroy {
     window.addEventListener('storage', this.storageEventListener.bind(this));
   }
 
-  private storageEventListener(event: StorageEvent) {
+  private storageEventListener(event: StorageEvent): void {
     if (event.storageArea === localStorage) {
       let value;
-      try { value = JSON.parse(event.newValue); }
-      catch (e) { value = event.newValue; }
-      if (value) {
-        this.onSubject.next(value);
+      try {
+        value = JSON.parse(event.newValue);
+      } catch (e) {
+        value = event.newValue;
       }
+      this.onSubject.next(value);
     }
   }
 
